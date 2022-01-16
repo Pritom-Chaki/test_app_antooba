@@ -14,7 +14,7 @@ class _KeyWordAddState extends State<KeyWordAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("KeyWord Add"),
+        title: const Text("KeyWord  Add Class"),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
