@@ -28,28 +28,36 @@ class _KeyWordAddState extends State<KeyWordAdd> {
               decoration: const InputDecoration(hintText: "Enter Keyword"),
             ),
             Container(
-              height: 50,
-              child: ListView.builder(
-                  itemCount: _keyWordList.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Chip(
-                      elevation: 0,
-                     // padding: const EdgeInsets.on(3),
-                      backgroundColor: Colors.black38,
-                      shadowColor: Colors.black, //CircleAvatar
-                      label: Text(_keyWordList[index]),
-                      deleteIconColor: Colors.red,
-                      deleteIcon: const Icon(
-                        Icons.close_outlined,
-                  size: 14,
-                      ), 
-                      onDeleted: (){
-                        _deleteChip(index);
-                      },//Text
-                    ); //;
-                  }),
-            ),
+                height: 50,
+                width: double.infinity,
+                child: _keyWordList.length != 0
+                    ? Wrap(
+                        children: _keyWordList
+                            .asMap()
+                            .map((index, element) => MapEntry(
+                                  index,
+                                  Chip(
+                                    elevation: 0,
+                                    backgroundColor:
+                                        Colors.black.withOpacity(0.1),
+                                    shadowColor: Colors.black, //CircleAvatar
+                                    label: Text(element),
+                                    deleteIconColor: Colors.red,
+                                    deleteIcon: const Icon(
+                                      Icons.close_outlined,
+                                      size: 14,
+                                    ),
+                                    onDeleted: () {
+                                      _deleteChip(index);
+                                    }, //Text
+                                  ),
+                                ))
+                            .values
+                            .toList(),
+                      )
+                    : const SizedBox(),
+
+                ),
           ],
         ),
       ),
@@ -67,10 +75,11 @@ class _KeyWordAddState extends State<KeyWordAdd> {
 
     print("ADD : $_keyWordList");
   }
-  void _deleteChip(int index ){
-setState(() {
-  _keyWordList.removeAt(index);
-});
-  print("Delete $_keyWordList");
+
+  void _deleteChip(int index) {
+    setState(() {
+      _keyWordList.removeAt(index);
+    });
+    print("Delete $_keyWordList");
   }
 }
